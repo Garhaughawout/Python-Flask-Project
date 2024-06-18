@@ -1,8 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import PropertyList from '../components/PropertyList';
+import PropertyDetail from '../components/PropertyDetail';
+import AddProperty from '../components/AddProperty';
+import Register from '../components/Register';
+import Login from '../components/Login';
 
 function App() {
-  return <h1>Project Client</h1>;
-}
+  return (
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route path="/" exact component={PropertyList} />
+        <Route path="/properties" exact component={PropertyList} />
+        <Route path="/properties/:id" component={PropertyDetail} />
+        <Route path="/add-property" component={AddProperty} />
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
+      </Switch>
+    </Router>
+  );
+};
 
 export default App;
