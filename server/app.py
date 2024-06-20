@@ -56,7 +56,7 @@ def login():
     return jsonify(access_token=access_token), 200
 
 @app.route('/properties', methods=['POST', 'GET'])
-@jwt_required()
+##@jwt_required()
 def manage_properties():
     if request.method == 'POST':
         data = request.get_json()
@@ -75,7 +75,7 @@ def manage_properties():
         return jsonify([property.to_dict() for property in properties]), 200
 
 @app.route('/properties/<int:property_id>', methods=['GET', 'PUT', 'DELETE'])
-@jwt_required()
+##@jwt_required()
 def manage_property(property_id):
     property = Property.query.get_or_404(property_id)
     if request.method == 'GET':
@@ -94,7 +94,7 @@ def manage_property(property_id):
         return jsonify({"message": "Property deleted successfully!"}), 200
 
 @app.route('/visits', methods=['POST', 'GET'])
-@jwt_required()
+##@jwt_required()
 def manage_visits():
     if request.method == 'POST':
         data = request.get_json()
@@ -113,7 +113,7 @@ def manage_visits():
         return jsonify([visit.to_dict() for visit in visits]), 200
 
 @app.route('/favorites', methods=['POST', 'GET'])
-@jwt_required()
+##@jwt_required()
 def manage_favorites():
     if request.method == 'POST':
         data = request.get_json()
@@ -127,7 +127,7 @@ def manage_favorites():
         return jsonify([favorite.to_dict() for favorite in favorites]), 200
 
 @app.route('/favorites/<int:favorite_id>', methods=['DELETE'])
-@jwt_required()
+##@jwt_required()
 def delete_favorite(favorite_id):
     favorite = FavoriteProperty.query.get_or_404(favorite_id)
     db.session.delete(favorite)
@@ -135,7 +135,7 @@ def delete_favorite(favorite_id):
     return jsonify({"message": "Favorite removed successfully"}), 200
 
 @app.route('/reviews', methods=['POST', 'GET'])
-@jwt_required()
+##@jwt_required()
 def manage_reviews():
     if request.method == 'POST':
         data = request.get_json()
@@ -154,7 +154,7 @@ def manage_reviews():
         return jsonify([review.to_dict() for review in reviews]), 200
 
 @app.route('/reviews/<int:review_id>', methods=['PUT', 'DELETE'])
-@jwt_required()
+##@jwt_required()
 def manage_review(review_id):
     review = Review.query.get_or_404(review_id)
     if request.method == 'PUT':
