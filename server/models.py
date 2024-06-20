@@ -1,7 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
-from sqlalchemy.orm import validates
-from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.orm import relationship
 from sqlalchemy_serializer import SerializerMixin
 from datetime import datetime
 
@@ -17,7 +16,7 @@ class User(db.Model, SerializerMixin):
     properties = db.relationship('Property', backref='owner', lazy=True)
     reviews = db.relationship('Review', backref='user', lazy=True)
     visits = db.relationship('Visit', backref='visitor', lazy=True)
-    favorite_properties = db.relationship('FavoriteProperty', backref='user', lazy=True)
+    favorite_properties = db.relationship('FavoriteProperty', backref='favorite_properties', lazy=True)
 
     def __repr__(self):
         return f'<User {self.username}>'
@@ -47,7 +46,7 @@ class Property(db.Model, SerializerMixin):
     
     visits = db.relationship('Visit', backref='property', lazy=True)
     reviews = db.relationship('Review', backref='property', lazy=True)
-    favorited_by = db.relationship('FavoriteProperty', back_populates='property')
+    favorites = db.relationship('FavoriteProperty', backref='property', lazy=True)
 
     def __repr__(self):
         return f'<Property {self.title}>'
@@ -91,8 +90,8 @@ class FavoriteProperty(db.Model, SerializerMixin):
     property_id = db.Column(db.Integer, db.ForeignKey('properties.id'), nullable=False)
     added_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     
-    user = db.relationship('User', back_populates='favorite_properties')
-    property = db.relationship('Property', back_populates='favorited_by')
+    user = db.relationship('User', backref='favorite_properties')
+    property = db.relationship('Property', backref='favorite_properties')
 
     def __repr__(self):
         return f'<FavoriteProperty {self.id} by User {self.user_id}>'
