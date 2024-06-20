@@ -3,32 +3,23 @@ import '../styles/PropertyList.css';
 import Property from './Property';
 
 function PropertyList() {
-  const [properties, setProperties] = useState({
-    title: 'Property 1',
-    image: 'https://via.placeholder.com/150',
-    description: 'This is the first property',
-    price: 100000,
-    location: 'San Francisco'
-});
+  const [properties, setProperties] = useState([]);
 
-
-
+  useEffect(() => {
+    fetch('http://localhost:5555/properties')
+      .then((res) => res.json())
+      .then((data) => {
+        setProperties(data);
+      });
+  }, []);
 
   return (
     <div className='propertylist-container'>
-      <div className='propertylist-title-container'>
-        <h1 className='propertylist-title'>{properties.title}</h1>
-      </div>
-      <div className='propertylist-image-container'>
-        <img className='propertylist-image' src={properties.image} alt={properties.title} />
-      </div>
-      <ul className='propertylist-info-container'>
-        <li className='propertylist-item'>{`$${properties.price}`}</li>
-        <li className='propertylist-item'>{properties.location}</li>
-        <li className='propertylist-item'>{properties.description}</li>
-      </ul>
+      {properties.map((property) => (
+        <Property key={property.id} property={property} />
+      ))}
     </div>
   );
-};
+}
 
 export default PropertyList;

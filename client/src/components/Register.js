@@ -7,6 +7,7 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+//USE FETCH TO POST NEW USER INFO
 
   return (
     <form className='register-form-container'>

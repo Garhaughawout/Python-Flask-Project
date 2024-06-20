@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/Property.css';
 
-const PropertyDetail = () => {
-  const { id } = useParams();
-  const [property, setProperty] = useState(null);
-
-  if (!property) {
-    return <div>Loading...</div>;
-  }
-
+const Property = ({ property }) => {
   return (
     <div className='property-container'>
-      <div>
-        <h1>{property.title}</h1>
+      <div className='property-title-container'>
+        <h1 className='property-title'>{property.title}</h1>
       </div>
-      <p>{property.description}</p>
-      <p>Price: ${property.price}</p>
-      <p>Location: {property.location}</p>
+      <div className='property-image-container'>
+        <img className='property-image' src={property.image} alt={property.title} />
+      </div>
+      <ul className='property-info-container'>
+        <li className='property-item'>{`$${property.price}`}</li>
+        <li className='property-item'>{property.location}</li>
+        <li className='property-item'>{property.description}</li>
+      </ul>
+      <Link to={`/property/${property.id}`}>View Details</Link>
     </div>
   );
 };
 
-export default PropertyDetail;
+export default Property;

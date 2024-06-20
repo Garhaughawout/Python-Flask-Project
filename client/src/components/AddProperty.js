@@ -8,6 +8,7 @@ const AddProperty = () => {
   const [price, setPrice] = useState('');
   const [location, setLocation] = useState('');
 
+// ADD NEW LISTING AFTER USER INFO CHECKED
 
   return (
     <form className='property-form-container'>
