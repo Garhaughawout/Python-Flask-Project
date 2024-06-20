@@ -9,7 +9,7 @@ const PropertyDetail = () => {
     fetch(`http://localhost:5555/properties/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setProperty(data);
+      setProperty(data);
       });
   }, [id]);
 
