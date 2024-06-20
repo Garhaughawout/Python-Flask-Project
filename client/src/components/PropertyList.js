@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/PropertyList.css';
-
+import Property from './Property';
 
 function PropertyList() {
   const [properties, setProperties] = useState({
@@ -10,6 +10,8 @@ function PropertyList() {
     price: 100000,
     location: 'San Francisco'
 });
+
+
 
 
   return (
