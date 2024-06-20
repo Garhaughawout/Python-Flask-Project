@@ -6,6 +6,13 @@ from faker import Faker
 faker = Faker()
 
 with app.app_context():
+    
+    User.query.delete()
+    Property.query.delete()
+    Visit.query.delete()
+    FavoriteProperty.query.delete()
+    Review.query.delete()
+    
     db.create_all()
 
     # Create users

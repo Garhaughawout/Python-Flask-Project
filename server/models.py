@@ -44,9 +44,9 @@ class Property(db.Model, SerializerMixin):
     address = db.Column(db.String(255), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
-    visits = db.relationship('Visit', backref='property', lazy=True)
-    reviews = db.relationship('Review', backref='property', lazy=True)
-    favorites = db.relationship('FavoriteProperty', backref='property', lazy=True)
+    visits = db.relationship('Visit', backref='visits_property', lazy=True)
+    reviews = db.relationship('Review', backref='reviews_property', lazy=True)
+    favorites = db.relationship('FavoriteProperty', backref='favorites_property', lazy=True)
 
     def __repr__(self):
         return f'<Property {self.title}>'
@@ -90,8 +90,8 @@ class FavoriteProperty(db.Model, SerializerMixin):
     property_id = db.Column(db.Integer, db.ForeignKey('properties.id'), nullable=False)
     added_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     
-    user = db.relationship('User', backref='favorite_properties')
-    property = db.relationship('Property', backref='favorite_properties')
+    user = db.relationship('User', backref='users_favorite_properties')
+    property = db.relationship('Property', backref='favorited_property')
 
     def __repr__(self):
         return f'<FavoriteProperty {self.id} by User {self.user_id}>'
