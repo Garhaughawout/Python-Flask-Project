@@ -19,6 +19,7 @@ const onSubmit = async (values, actions) => {
 
         const data = await response.json();
         console.log('Success:', data);
+        console.log(data)
 
         // Reset the form after a successful submission
         actions.resetForm();
@@ -34,7 +35,7 @@ const AddProperty = () => {
         title:"",
         image:"",
         price:"",
-        location:"",
+        address:"",
         description:"",
     },
     validationSchema: addPropertySchema,
@@ -83,13 +84,13 @@ const AddProperty = () => {
         <label className='property-form-label'>
             Location:
             <input 
-            className={`property-form-input ${errors.image && touched.image ? "input-error" : ""}`}
+            className={`property-form-input ${errors.address && touched.address ? "input-error" : ""}`}
             type="text" 
-            value={values.location} 
+            value={values.address} 
             onChange={handleChange}
             onBlur={handleBlur}  
-            name="location"/>
-            {errors.location && touched.location && <p className="error">{errors.location}</p>}
+            name="address"/>
+            {errors.address && touched.address && <p className="error">{errors.address}</p>}
         </label>
         <label className='property-form-label'>
             Description:

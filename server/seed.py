@@ -7,11 +7,11 @@ faker = Faker()
 
 with app.app_context():
     
-    User.query.delete()
-    Property.query.delete()
-    Visit.query.delete()
-    FavoriteProperty.query.delete()
-    Review.query.delete()
+    ##User.query.delete()
+    ##Property.query.delete()
+    ##Visit.query.delete()
+    ##FavoriteProperty.query.delete()
+    ##Review.query.delete()
     
     db.create_all()
 
@@ -35,6 +35,7 @@ with app.app_context():
         for i in range(2):
             property = Property(
                 title=faker.sentence(nb_words=3),
+                image=f"https://loremflickr.com/640/480/house?random={faker.uuid4()}",
                 description=faker.text(),
                 price=faker.random_number(digits=5),
                 address=faker.address(),

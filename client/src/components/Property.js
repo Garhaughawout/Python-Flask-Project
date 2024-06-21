@@ -12,9 +12,9 @@ const Property = ({ property }) => {
         <img className='property-image' src={property.image} alt={property.title} />
       </div>
       <ul className='property-info-container'>
-        <li className='property-item'>{`$${property.price}`}</li>
-        <li className='property-item'>{property.location}</li>
-        <li className='property-item'>{property.description}</li>
+        <li className='property-item'>Price: {`$${property.price}`}</li>
+        <li className='property-item'>Location: {property.address}</li>
+        <li className='property-item'>Description: {property.description}</li>
       </ul>
       <Link to={`/property/${property.id}`}>View Details</Link>
     </div>

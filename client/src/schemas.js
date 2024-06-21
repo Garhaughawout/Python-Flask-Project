@@ -13,6 +13,6 @@ export const addPropertySchema = yup.object().shape({
       .required('Price is required')
       .positive('Price must be a positive number')
       .integer('Price must be an integer'),
-    location: yup.string().required('Location is required'),
+    address: yup.string().required('Location is required'),
     description: yup.string().required('Description is required')
   });

@@ -24,7 +24,8 @@ const PropertyDetail = () => {
       </div>
       <p>{property.description}</p>
       <p>Price: ${property.price}</p>
-      <p>Location: {property.location}</p>
+      <p>Location: {property.address}</p>
+      <img className='property-image' src={property.image} alt={property.title} />
     </div>
   );
 };

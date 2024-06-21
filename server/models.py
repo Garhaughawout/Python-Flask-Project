@@ -39,10 +39,11 @@ class Property(db.Model, SerializerMixin):
     
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), nullable=False)
+    image = db.Column(db.String(255), nullable=True)
     description = db.Column(db.Text, nullable=False)
     price = db.Column(db.Float, nullable=False)
     address = db.Column(db.String(255), nullable=False)
-    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     
     visits = db.relationship('Visit', backref='visits_property', lazy=True)
     reviews = db.relationship('Review', backref='reviews_property', lazy=True)
@@ -55,6 +56,7 @@ class Property(db.Model, SerializerMixin):
         return {
             'id': self.id,
             'title': self.title,
+            'image': self.image,
             'description': self.description,
             'price': self.price,
             'address': self.address,
