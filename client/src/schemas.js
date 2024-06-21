@@ -7,7 +7,7 @@ export const addPropertySchema = yup.object().shape({
     image: yup.string()
       .url('Must be a valid URL')
       .matches(/\.(jpeg|jpg|gif|png)$/, 'Must be a valid image URL')
-      .min(100, 'Image URL must be at least 100 characters long')
+      .min(10, 'Image URL must be at least 10 characters long')
       .required('Image URL is required'),
     price: yup.number()
       .required('Price is required')

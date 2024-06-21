@@ -4,9 +4,28 @@ import {useFormik} from 'formik';
 import { addPropertySchema } from '../schemas';
 
 const onSubmit = async (values, actions) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    actions.resetForm()
-}
+    try {
+        const response = await fetch('http://localhost:5555/properties', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(values),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        console.log('Success:', data);
+
+        // Reset the form after a successful submission
+        actions.resetForm();
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
 
 const AddProperty = () => {
 
