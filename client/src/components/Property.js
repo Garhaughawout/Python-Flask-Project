@@ -17,7 +17,7 @@ function Property({ property }) {
         <li className='property-item'>Location: {property.address}</li>
         <li className='property-item'>Description: {property.description}</li>
       </ul>
-      <Link to={{
+      <Link className='property-link' to={{
         pathname: `/property/${property.id}`,
       }}
         >

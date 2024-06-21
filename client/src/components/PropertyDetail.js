@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import '../styles/PropertyDetail.css';
 
 const PropertyDetail = () => {
   const { id } = useParams();
@@ -19,12 +20,12 @@ const PropertyDetail = () => {
 
   return (
     <div className='property-container'>
-      <div>
-        <h1>{property.title}</h1>
+      <div className='property-title'>
+        <h1 className='property-title'>{property.title}</h1>
       </div>
-      <p>{property.description}</p>
-      <p>Price: ${property.price}</p>
-      <p>Location: {property.address}</p>
+      <p className='property-description'>{property.description}</p>
+      <p className='property-price'>Price: ${property.price}</p>
+      <p className='property-location'>Location: {property.address}</p>
       <img className='property-image' src={property.image} alt={property.title} />
     </div>
   );

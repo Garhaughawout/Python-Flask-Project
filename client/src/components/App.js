@@ -7,13 +7,14 @@ import AddProperty from '../components/AddProperty';
 import Register from '../components/Register';
 import Login from '../components/Login';
 import PropertyDetail from './PropertyDetail';
+import Home from './Home';
 
 function App() {
   return (
     <Router>
       <Navbar />
       <Switch>
-        <Route path="/" exact component={PropertyList} />
+        <Route path="/" exact component={Home} />
         <Route path="/properties" exact component={PropertyList} />
         <Route path="/properties/:id" component={Property} />
         <Route path="/add-property" component={AddProperty} />
