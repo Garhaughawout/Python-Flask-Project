@@ -1,3 +1,15 @@
+input.input-error.
+select.input-error {
+  border: 3px #f06969;
+}
+.error {
+  color: red
+}
+
+button:disabled {
+  opacity: 0.35;
+}
+
 .property-form-container {
     max-width: 400px;
     margin: 5% auto;
@@ -22,7 +34,7 @@
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 3px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
     margin-top: 5px;
