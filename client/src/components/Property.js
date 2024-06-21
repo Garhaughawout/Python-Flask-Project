@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Property.css';
 
-const Property = ({ property }) => {
+
+function Property({ property }) {
   return (
     <div className='property-container'>
       <div className='property-title-container'>
@@ -16,7 +17,11 @@ const Property = ({ property }) => {
         <li className='property-item'>Location: {property.address}</li>
         <li className='property-item'>Description: {property.description}</li>
       </ul>
-      <Link to={`/property/${property.id}`}>View Details</Link>
+      <Link to={{
+        pathname: `/property/${property.id}`,
+      }}
+        >
+        View Details</Link>
     </div>
   );
 };

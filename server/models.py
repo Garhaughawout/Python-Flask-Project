@@ -41,6 +41,7 @@ class Property(db.Model, SerializerMixin):
     title = db.Column(db.String(120), nullable=False)
     image = db.Column(db.String(255), nullable=True)
     description = db.Column(db.Text, nullable=False)
+    image = db.Column(db.String(255))
     price = db.Column(db.Float, nullable=False)
     address = db.Column(db.String(255), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
