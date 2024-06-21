@@ -1,82 +1,69 @@
-/* Property.css */
+/* Container for the entire property card */
 .property-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 20px;
     padding: 20px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    font-family: Arial, sans-serif;
+    max-width: 400px;
+    background-color: #fff;
+    transition: transform 0.2s ease-in-out;
   }
   
+  /* Property card hover effect */
+  .property-container:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Title container */
   .property-title-container {
-    width: 100%;
     margin-bottom: 15px;
   }
   
+  /* Property title */
   .property-title {
     font-size: 24px;
-    font-weight: bold;
-    color: #333;
     margin: 0;
+    color: #333;
   }
   
+  /* Image container */
   .property-image-container {
-    width: 100%;
+    text-align: center;
     margin-bottom: 15px;
   }
   
+  /* Property image */
   .property-image {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
     border-radius: 8px;
   }
   
+  /* Info container */
   .property-info-container {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
-    width: 100%;
-    margin: 0;
+    margin: 0 0 15px 0;
   }
   
+  /* Individual info item */
   .property-item {
+    margin-bottom: 10px;
     font-size: 16px;
-    color: #444;
-    margin: 8px 0;
-    padding: 8px 0;
-    border-bottom: 1px solid #e0e0e0;
+    color: #555;
   }
   
-  .property-item:last-child {
-    border-bottom: none;
-  }
-  
-  .property-item .label {
-    font-weight: bold;
-    color: #222;
-  }
-  
-  .property-item .value {
-    color: #666;
-  }
-  
-  .property-item span {
-    display: block;
-  }
-  
-  .property-link {
-    margin-top: 20px;
-    font-size: 16px;
-    color: #0073e6;
+  /* Link to view details */
+  .property-container a {
     text-decoration: none;
+    color: #007bff;
     font-weight: bold;
+    display: inline-block;
+    margin-top: 10px;
+    transition: color 0.2s ease-in-out;
   }
   
-  .property-link:hover {
-    text-decoration: underline;
+  .property-container a:hover {
+    color: #0056b3;
   }
   

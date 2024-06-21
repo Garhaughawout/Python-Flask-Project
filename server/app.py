@@ -3,14 +3,26 @@ import re
 from flask import request, jsonify
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
-from config import app, db
+from config import app, db, api, bcrypt
 from models import User, Property, Visit, FavoriteProperty, Review
-bcrypt = Bcrypt(app)
+from flask_restful import Resource
+
 jwt = JWTManager(app)
 
 @app.route('/')
 def index():
     return '<h1>Project Server</h1>'
+
+class ClearSession(Resource):
+
+    def delete(self):
+    
+        session['page_views'] = None
+        session['user_id'] = None
+
+        return {}, 204
+    
+api.add_resource(ClearSession, '/clear')
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -18,18 +30,6 @@ def register():
     username = data.get('username')
     email = data.get('email')
     password = data.get('password')
-
-    # Validate username
-    if not re.match(r'^\w+$', username):
-        return jsonify({"error": "Username must contain only letters, numbers, and underscores."}), 400
-
-    # Validate email
-    if not re.match(r'^[^@]+@[^@]+\.[^@]+$', email):
-        return jsonify({"error": "Invalid email address."}), 400
-
-    # Validate password
-    if len(password) < 8:
-        return jsonify({"error": "Password must be at least 8 characters long."}), 400
 
     # Check if the username or email already exists
     if User.query.filter_by(username=username).first() or User.query.filter_by(email=email).first():
@@ -42,18 +42,39 @@ def register():
 
     return jsonify({"message": "User registered successfully!"}), 201
 
-@app.route('/login', methods=['POST'])
-def login():
-    data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
+class Login(Resource):
 
-    user = User.query.filter_by(username=username).first()
-    if user is None or not user.check_password(password):
-        return jsonify({"error": "Invalid username or password."}), 401
+    def post(self):
+        
+        username = request.get_json()['username']
+        user = User.query.filter(User.username == username).first()
 
-    access_token = create_access_token(identity={'id': user.id, 'username': user.username})
-    return jsonify(access_token=access_token), 200
+        session['user_id'] = user.id
+
+        return user.to_dict(), 200
+
+class Logout(Resource):
+
+    def delete(self):
+
+        session['user_id'] = None
+        
+        return {}, 204
+
+class CheckSession(Resource):
+
+    def get(self):
+        
+        user_id = session.get('user_id')
+        if user_id:
+            user = User.query.filter(User.id == user_id).first()
+            return user.to_dict(), 200
+        
+        return {}, 401
+
+api.add_resource(Login, '/login')
+api.add_resource(Logout, '/logout')
+api.add_resource(CheckSession, '/check_session')
 
 @app.route('/properties', methods=['POST', 'GET'])
 ##@jwt_required()
@@ -62,11 +83,11 @@ def manage_properties():
         data = request.get_json()
         new_property = Property(
             title=data['title'],
+            image=data['image'],
             description=data['description'],
             price=data['price'],
             address=data['address'],
-            owner_id=get_jwt_identity()['id']
-            
+            ##owner_id=get_jwt_identity()['id']
         )
         db.session.add(new_property)
         db.session.commit()
@@ -109,7 +130,7 @@ def manage_visits():
         db.session.commit()
         return jsonify({"message": "Visit scheduled successfully!"}), 201
     else:
-        user_id = get_jwt_identity()['id']
+        ##user_id = get_jwt_identity()['id']
         visits = Visit.query.filter_by(user_id=user_id).all()
         return jsonify([visit.to_dict() for visit in visits]), 200
 
@@ -123,7 +144,7 @@ def manage_favorites():
         db.session.commit()
         return jsonify({"message": "Property added to favorites"}), 201
     else:
-        user_id = get_jwt_identity()['id']
+        ##user_id = get_jwt_identity()['id']
         favorites = FavoriteProperty.query.filter_by(user_id=user_id).all()
         return jsonify([favorite.to_dict() for favorite in favorites]), 200
 
