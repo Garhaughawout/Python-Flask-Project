@@ -14,10 +14,10 @@ function Property({ property }) {
       </div>
       <ul className='property-info-container'>
         <li className='property-item'>{`$${property.price}`}</li>
-        <li className='property-item'>{property.location}</li>
+        <li className='property-item'>{property.address}</li>
         <li className='property-item'>{property.description}</li>
       </ul>
-      <Link to={{
+      <Link className='property-link' to={{
         pathname: `/property/${property.id}`,
       }}
         >
