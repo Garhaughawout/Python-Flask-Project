@@ -31,12 +31,25 @@ with app.app_context():
 
     # Create properties
     properties = []
+    images = [
+        "https://www.anderslasaterarchitects.com/wp-content/uploads/2017/11/00-cornelio_facade_featureimage.png",
+        "https://www.wpi.edu/sites/default/files/styles/1x_500x300/public/2023-06/Oak%20House_500x300_front.jpg?itok=orhb027n",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdv62Yhl4oRnUCwFAIb8na8om8T7wDk7mwCg&s",
+        "https://d194ip2226q57d.cloudfront.net/images/Delaware_Cox-Mansion_By-Brandon-Al.a6ec9647.fill-500x300.jpg",
+        "https://nightsbeforechristmas.com/wp-content/uploads/2022/09/The-Ohlendorf-Home_Out-scaled-e1716487716872-500x300.jpg",
+        "https://nightsbeforechristmas.com/wp-content/uploads/2022/09/The-Bellamy-Home_Panned-out-500x300.jpg",
+        "https://i0.wp.com/apexhomesllc.com/wp-content/uploads/2024/02/HOME_Our-Homes_Apex-Homes_Brier-B-House.png?resize=500%2C300&ssl=1",
+        "https://danielwaynehomes.com/wp-content/uploads/2017/09/500-wide-foursome-home-03.jpg",
+        "https://i.guim.co.uk/img/media/bf97c6e7e6539a3865b9ffbe0520bae5cec504f6/0_400_6000_3600/500.jpg?quality=85&auto=format&fit=max&s=47fa38b3812601b150ae9e18c11a8ca7",
+        "https://www.fisherrealtync.com/wp-content/uploads/2023/12/185-Lake-House-Trail-4088349-01-500x300.jpg"
+    ]
     for user in users:
         for i in range(2):
             property = Property(
                 title=faker.sentence(nb_words=3),
                 description=faker.text(),
-                price=faker.random_number(digits=5),
+                image=images[len(properties)],
+                price=faker.random_number(digits=6),
                 address=faker.address(),
                 owner_id=user.id
             )

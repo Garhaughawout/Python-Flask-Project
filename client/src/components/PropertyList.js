@@ -16,7 +16,7 @@ function PropertyList() {
   return (
     <div className='propertylist-container'>
       {properties.map((property) => (
-        <Property key={property.id} property={property} />
+        <div><Property key={property.id} property={property} /></div>
       ))}
     </div>
   );

@@ -66,6 +66,7 @@ def manage_properties():
             price=data['price'],
             address=data['address'],
             owner_id=get_jwt_identity()['id']
+            
         )
         db.session.add(new_property)
         db.session.commit()
