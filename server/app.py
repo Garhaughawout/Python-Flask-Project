@@ -108,7 +108,7 @@ def manage_visits():
         db.session.commit()
         return jsonify({"message": "Visit scheduled successfully!"}), 201
     else:
-        user_id = get_jwt_identity()['id']
+        ##user_id = get_jwt_identity()['id']
         visits = Visit.query.filter_by(user_id=user_id).all()
         return jsonify([visit.to_dict() for visit in visits]), 200
 
@@ -122,7 +122,7 @@ def manage_favorites():
         db.session.commit()
         return jsonify({"message": "Property added to favorites"}), 201
     else:
-        user_id = get_jwt_identity()['id']
+        ##user_id = get_jwt_identity()['id']
         favorites = FavoriteProperty.query.filter_by(user_id=user_id).all()
         return jsonify([favorite.to_dict() for favorite in favorites]), 200
 
